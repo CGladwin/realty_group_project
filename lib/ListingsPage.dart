@@ -1,3 +1,4 @@
+import 'Converter.dart';
 import 'package:flutter/material.dart';
 import 'AddListingPage.dart';
 import 'AppDrawer.dart';
@@ -22,6 +23,7 @@ class ListingsPageState extends State<ListingsPage> {
   void initState() {
     super.initState();
     notificationHandler.initializeNotifications();
+    _setupAttributeChangeListener();
   }
 
   ListingsModel listingsModel = ListingsModel();
@@ -29,17 +31,28 @@ class ListingsPageState extends State<ListingsPage> {
   String _searchQuery = '';
   String _decorationLabelText = 'Search Address';
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final String? searchQuery = ModalRoute.of(context)!.settings.arguments as String?;
-    if(searchQuery != null){
-      setState((){
-        _searchQuery = searchQuery;
-        _decorationLabelText = searchQuery;
-        _handleSearch(searchQuery);
-      });
-    }
+  void _setupAttributeChangeListener() {
+    const String collection = 'houses';
+    const String attribute = 'highestBid';
+
+    FirebaseFirestore.instance.collection(collection).snapshots().listen((snapshot) {
+      for (var change in snapshot.docChanges) {
+        final data = change.doc.data();
+
+        if (change.type == DocumentChangeType.modified) {
+          if (data != null && data.containsKey(attribute)) {
+            _handleAttributeChange(data);
+          }
+        }
+      }
+    });
+  }
+
+  void _handleAttributeChange(Map data) async {
+    String address = data["address"];
+    double highestBid = double.parse(data["highestBid"].toString());
+    await notificationHandler.notificationNow("$address has a new highest bid: ${Converter.numToCurrency(highestBid)}");
+    setState(() {});
   }
 
   Future<void> _saveSearch(String searchQuery) async {
@@ -81,7 +94,7 @@ class ListingsPageState extends State<ListingsPage> {
         foregroundColor: Colors.white,
         title: const Text("Realty"),
       ),
-      drawer: AppDrawer(notificationHandler: notificationHandler),
+      drawer: const AppDrawer(),
       body: Column(
         children: [
           Padding(

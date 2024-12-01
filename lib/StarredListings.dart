@@ -12,6 +12,5 @@ class StarredListings extends ChangeNotifier {
     } else {
       _starredListings.add(listing);
     }
-    notifyListeners();
   }
 }

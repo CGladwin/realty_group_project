@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'StarredListings.dart';
-import 'NotificationHandler.dart';
 
 class FavouriteListings extends StatelessWidget {
-  final NotificationHandler notificationHandler;
 
-  const FavouriteListings({super.key, required this.notificationHandler});
+  const FavouriteListings({super.key});
 
   @override
   Widget build(BuildContext context) {
     final starredListings = Provider.of<StarredListings>(context);
-
-    starredListings.addListener(() {
-      for (var listing in starredListings.starredListings) {
-        notificationHandler.notificationNow(
-          "Listing updated: ${listing.address ?? 'No Address'} - Bid Price: \$${listing.highestBid}",
-        );
-      }
-    });
 
     return Scaffold(
       appBar: AppBar(

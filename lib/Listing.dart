@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'PlaceBid.dart';
 import 'package:provider/provider.dart';
 import 'StarredListings.dart';
+import 'Converter.dart';
 
 // ignore_for_file: file_names
 class Listing {
@@ -90,12 +90,6 @@ class ListingWidgetState extends State<ListingWidget>{
     print("Scheduling Viewing");
   }
 
-  String numToCurrency(double num) {
-    bool hasDecimals = num % 1 != 0 || num < 1000;
-    final formatter = NumberFormat.currency(locale: 'en_US', decimalDigits: hasDecimals ? 2 : 0, symbol: '\$');
-    return formatter.format(num);
-  }
-
   @override
   Widget build(BuildContext context){
     final starredListings = Provider.of<StarredListings>(context);
@@ -132,7 +126,7 @@ class ListingWidgetState extends State<ListingWidget>{
             child: Row(
               children: [
                 Text(
-                  numToCurrency(widget.listing.price!),
+                  Converter.numToCurrency(widget.listing.price!),
                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(width: 20.0),

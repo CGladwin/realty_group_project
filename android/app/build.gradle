@@ -27,7 +27,7 @@ android {
         applicationId = "com.example.realty_group_project"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23 //minSdk had to be set to 23 to allow for the latest version of flutter_auth, was 21 with flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
