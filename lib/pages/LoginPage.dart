@@ -127,8 +127,3 @@ class LoginPageState extends State<LoginPage>{
     );
   }
 }
-
-
-//TODO: Login Page with Username/Password
-//TODO: Track login status throughout app, allow using the app as a guest
-//TODO: Add Login/Logout button to the app drawer
