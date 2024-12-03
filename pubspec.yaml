@@ -48,6 +48,7 @@ dependencies:
   firebase_auth: ^5.3.3
   csv: ^6.0.0
   firedart: ^0.9.8
+  build_runner: ^2.4.13
 
 dev_dependencies:
   flutter_test:

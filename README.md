@@ -94,6 +94,15 @@ Zain Siddiqui - 100867903
   - All API calls include error-handling mechanisms to ensure the app remains robust under network issues or invalid data.
 
 ---
+## Developer Features
+1. **Unit Testing:** 
+- cd into the root project directory and enter `dart run build_runner build` in the command line
+- uses Mockito library
+2. **Script for Resetting Firebase "Houses" Table:**
+- cd into the root project directory and enter `dart run lib\scripts\firebase_clear_and_import.dart` in the command line
+- uses firedart library
+- overwrites houses table with dummy data contained in `lib\scripts\houses_data.csv`
+---
 
 ## Project Structure
 
