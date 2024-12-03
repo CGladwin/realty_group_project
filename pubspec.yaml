@@ -52,6 +52,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  # Integration test package for simulating user interactions.
+  integration_test:
+    sdk: flutter
+
+  # Mockito for mocking classe during the unit tests.
+  mockito: ^5.3.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
